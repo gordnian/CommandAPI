@@ -20,7 +20,9 @@ x86/
 build/
 bld/
 [Bb]in/
+/src/CommandAPI/bin/
 [Oo]bj/
+/src/CommandAPI/obj/
 msbuild.log
 msbuild.err
 msbuild.wrn
@@ -28,6 +30,7 @@ msbuild.wrn
 .vs/
 # Riders
 .Idea/
+/.idea/
 # Compiled Source
 *.com
 *.class
