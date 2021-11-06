@@ -12,6 +12,8 @@ using Xunit;
 
 namespace CommandAPI.Tests
 {
+    
+    //Unit Tests
     public class CommandsControllerTests : IDisposable
     {
         private readonly Mock<ICommandAPIRepo> mockRepo;
