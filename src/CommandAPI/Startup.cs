@@ -1,5 +1,6 @@
 using System;
 using CommandAPI.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,12 @@ namespace CommandAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.Audience = _configuration["ResourceId"];
+                opt.Authority = $"{_configuration["Instance"]}{_configuration["TenantId"]}";
+            });
+            
             services.AddDbContext<CommandContext>(opt =>
             {
                 var builder = new NpgsqlConnectionStringBuilder();
@@ -53,6 +60,9 @@ namespace CommandAPI
             app.UseSerilogRequestLogging();
             
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
